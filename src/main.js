@@ -30,7 +30,7 @@ window.onload = async () => {
                         // Coin denomination to be displayed to the user.
                         coinDenom: "STR",
                         // Actual denom (i.e. uatom, uscrt) used by the blockchain.
-                        coinMinimalDenom: "str",
+                        coinMinimalDenom: "astr",
                         // # of decimal points to convert minimal denomination to user-facing denomination.
                         coinDecimals: 18,
                         // (Optional) Keplr can show the fiat value of the coin if a coingecko id is provided.
@@ -69,7 +69,7 @@ window.onload = async () => {
                         // Coin denomination to be displayed to the user.
                         coinDenom: "STR",
                         // Actual denom (i.e. uatom, uscrt) used by the blockchain.
-                        coinMinimalDenom: "str",
+                        coinMinimalDenom: "astr",
                         // # of decimal points to convert minimal denomination to user-facing denomination.
                         coinDecimals: 18,
                         // (Optional) Keplr can show the fiat value of the coin if a coingecko id is provided.
@@ -81,7 +81,7 @@ window.onload = async () => {
                         // Coin denomination to be displayed to the user.
                         coinDenom: "STR",
                         // Actual denom (i.e. uatom, uscrt) used by the blockchain.
-                        coinMinimalDenom: "str",
+                        coinMinimalDenom: "astr",
                         // # of decimal points to convert minimal denomination to user-facing denomination.
                         coinDecimals: 18,
                         // (Optional) Keplr can show the fiat value of the coin if a coingecko id is provided.
@@ -142,13 +142,17 @@ document.sendForm.onsubmit = () => {
     let recipient = document.sendForm.recipient.value;
     let amount = document.sendForm.amount.value;
 
+    if (!recipient) {
+        alert("Invalid recipient");
+        return false;
+    }
     amount = parseFloat(amount);
     if (isNaN(amount)) {
         alert("Invalid amount");
         return false;
     }
 
-    amount *= 1000000;
+    amount *= Math.pow(10, 18);
     amount = Math.floor(amount);
 
     (async () => {
@@ -167,11 +171,9 @@ document.sendForm.onsubmit = () => {
         );
 
         const result = await cosmJS.sendTokens(recipient, [{
-            denom: "str",
+            denom: "astr",
             amount: amount.toString(),
         }]);
-
-        console.log(result);
 
         if (result.code !== undefined &&
             result.code !== 0) {
