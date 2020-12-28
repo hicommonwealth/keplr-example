@@ -18,21 +18,21 @@ window.onload = async () => {
                 // If the same chain id is already registered, it will resolve and not require the user interactions.
                 await window.keplr.experimentalSuggestChain({
                     // Chain-id of the Cosmos SDK chain.
-                    chainId: "cosmoshub-3",
+                    chainId: "straightedge-2",
                     // The name of the chain to be displayed to the user.
-                    chainName: "Cosmos",
+                    chainName: "Straightedge",
                     // RPC endpoint of the chain.
-                    rpc: "https://node-cosmoshub-3.keplr.app/rpc",
+                    rpc: "https://node-straightedge-2.keplr.app/rpc",
                     // REST endpoint of the chain.
-                    rest: "https://node-cosmoshub-3.keplr.app/rest",
+                    rest: "https://node-straightedge-2.keplr.app/rest",
                     // Staking coin information
                     stakeCurrency: {
                         // Coin denomination to be displayed to the user.
-                        coinDenom: "ATOM",
+                        coinDenom: "STR",
                         // Actual denom (i.e. uatom, uscrt) used by the blockchain.
-                        coinMinimalDenom: "uatom",
+                        coinMinimalDenom: "str",
                         // # of decimal points to convert minimal denomination to user-facing denomination.
-                        coinDecimals: 6,
+                        coinDecimals: 18,
                         // (Optional) Keplr can show the fiat value of the coin if a coingecko id is provided.
                         // You can get id from https://api.coingecko.com/api/v3/coins/list if it is listed.
                         // coinGeckoId: ""
@@ -44,7 +44,7 @@ window.onload = async () => {
                     bip44: {
                         // You can only set the coin type of BIP44.
                         // 'Purpose' is fixed to 44.
-                        coinType: 118,
+                        coinType: 551,
                     },
                     // Bech32 configuration to show the address to user.
                     // This field is the interface of
@@ -57,21 +57,21 @@ window.onload = async () => {
                     //   bech32PrefixConsPub: string;
                     // }
                     bech32Config: {
-                        bech32PrefixAccAddr: "cosmos",
-                        bech32PrefixAccPub: "cosmospub",
-                        bech32PrefixValAddr: "cosmosvaloper",
-                        bech32PrefixValPub: "cosmosvaloperpub",
-                        bech32PrefixConsAddr: "cosmosvalcons",
-                        bech32PrefixConsPub: "cosmosvalconspub"
+                        bech32PrefixAccAddr: "str",
+                        bech32PrefixAccPub: "strpub",
+                        bech32PrefixValAddr: "strvaloper",
+                        bech32PrefixValPub: "strvaloperpub",
+                        bech32PrefixConsAddr: "strvalcons",
+                        bech32PrefixConsPub: "strvalconspub"
                     },
                     // List of all coin/tokens used in this chain.
                     currencies: [{
                         // Coin denomination to be displayed to the user.
-                        coinDenom: "ATOM",
+                        coinDenom: "STR",
                         // Actual denom (i.e. uatom, uscrt) used by the blockchain.
-                        coinMinimalDenom: "uatom",
+                        coinMinimalDenom: "str",
                         // # of decimal points to convert minimal denomination to user-facing denomination.
-                        coinDecimals: 6,
+                        coinDecimals: 18,
                         // (Optional) Keplr can show the fiat value of the coin if a coingecko id is provided.
                         // You can get id from https://api.coingecko.com/api/v3/coins/list if it is listed.
                         // coinGeckoId: ""
@@ -79,11 +79,11 @@ window.onload = async () => {
                     // List of coin/tokens used as a fee token in this chain.
                     feeCurrencies: [{
                         // Coin denomination to be displayed to the user.
-                        coinDenom: "ATOM",
+                        coinDenom: "STR",
                         // Actual denom (i.e. uatom, uscrt) used by the blockchain.
-                        coinMinimalDenom: "uatom",
+                        coinMinimalDenom: "str",
                         // # of decimal points to convert minimal denomination to user-facing denomination.
-                        coinDecimals: 6,
+                        coinDecimals: 18,
                         // (Optional) Keplr can show the fiat value of the coin if a coingecko id is provided.
                         // You can get id from https://api.coingecko.com/api/v3/coins/list if it is listed.
                         // coinGeckoId: ""
@@ -93,7 +93,7 @@ window.onload = async () => {
                     // Ideally, it is recommended to be the same with BIP44 path's coin type.
                     // However, some early chains may choose to use the Cosmos Hub BIP44 path of '118'.
                     // So, this is separated to support such chains.
-                    coinType: 118,
+                    coinType: 551,
                     // (Optional) This is used to set the fee of the transaction.
                     // If this field is not provided, Keplr extension will set the default gas price as (low: 0.01, average: 0.025, high: 0.04).
                     // Currently, Keplr doesn't support dynamic calculation of the gas prices based on on-chain data.
@@ -112,7 +112,7 @@ window.onload = async () => {
         }
     }
 
-    const chainId = "cosmoshub-3";
+    const chainId = "straightedge-2";
 
     // You should request Keplr to enable the wallet.
     // This method will ask the user whether or not to allow access if they haven't visited this website.
@@ -130,7 +130,7 @@ window.onload = async () => {
 
     // Initialize the gaia api with the offline signer that is injected by Keplr extension.
     const cosmJS = new SigningCosmosClient(
-        "https://node-cosmoshub-3.keplr.app/rest",
+        "https://node-straightedge-2.keplr.app/rest",
         accounts[0].address,
         offlineSigner,
     );
@@ -153,7 +153,7 @@ document.sendForm.onsubmit = () => {
 
     (async () => {
         // See above.
-        const chainId = "cosmoshub-3";
+        const chainId = "straightedge-2";
         await window.keplr.enable(chainId);
         const offlineSigner = window.getOfflineSigner(chainId);
 
@@ -161,13 +161,13 @@ document.sendForm.onsubmit = () => {
 
         // Initialize the gaia api with the offline signer that is injected by Keplr extension.
         const cosmJS = new SigningCosmosClient(
-            "https://node-cosmoshub-3.keplr.app/rest",
+            "https://node-straightedge-2.keplr.app/rest",
             accounts[0].address,
             offlineSigner
         );
 
         const result = await cosmJS.sendTokens(recipient, [{
-            denom: "uatom",
+            denom: "str",
             amount: amount.toString(),
         }]);
 
